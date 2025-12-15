@@ -1,0 +1,116 @@
+/* ===== Root variables ===== */
+:root {
+    --bg-main: #ffffff;
+    --bg-card: #ffffff;
+
+    --border: #e5e7eb;
+
+    --text-main: #111827;
+    --text-muted: #6b7280;
+
+    --accent: #2563eb;
+
+    --radius: 16px;
+}
+
+
+/* ===== Global styles ===== */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Vazirmatn", sans-serif;
+
+    background: linear-gradient(180deg, #0b1220, #16203a);
+
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+
+/* ===== Layout ===== */
+.container {
+    width: min(900px, 100%);
+    display: grid;
+    gap: 22px;
+}
+
+/* ===== Header ===== */
+.header {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 26px 22px;
+    text-align: center; /* Center title */
+}
+
+.header h1 {
+    margin: 0 0 10px;
+    font-weight: 800;
+    font-size: 28px;
+    letter-spacing: -0.5px;
+}
+
+.header p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+/* ===== Cards Grid ===== */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+@media (max-width: 640px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== Card ===== */
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+/* ===== Text ===== */
+.label {
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.value {
+    font-weight: 800;
+    color: var(--accent);
+    word-break: break-all;
+}
+
+/* ===== Footer ===== */
+.footer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+    opacity: 0.85;
+}
