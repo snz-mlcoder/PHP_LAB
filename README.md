@@ -38,6 +38,18 @@ A PHP project that detects basic user information such as browser, OS, device ty
 
 ---
 
+### 3️⃣ PHP PDF Upload & Viewer
+A minimal PHP project that allows users to upload a PDF file and view it directly in the browser.
+
+**Concepts learned:**
+- File uploads with `$_FILES`
+- Server-side file validation
+- Handling file paths
+- Displaying PDFs in the browser
+- Separating CSS into external files
+
+📁 Folder: `php-pdf-viewer`
+
 ## 🛠 Requirements
 - PHP 7+
 - Apache Server (XAMPP, WAMP, MAMP)
