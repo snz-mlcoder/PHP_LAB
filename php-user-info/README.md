@@ -8,10 +8,14 @@ device type, operating system, and browser.
 - Browser detection
 - OS detection
 - Device type detection
+- Location detection (Country/Region/City + Latitude/Longitude) via IP geolocation API
+
 
 ## Requirements
 - PHP 7+
 - Apache (XAMPP, WAMP, MAMP)
+- Internet access (required for location lookup)
+
 
 ## Setup
 1. Place the folder inside `htdocs`
@@ -20,5 +24,6 @@ device type, operating system, and browser.
    http://localhost/php-user-info
 
 ## Notes
-- Localhost will show limited IP data
-- Upload to real hosting for accurate results
+- Localhost will show limited IP/location data (often `127.0.0.1` or `::1`)
+- IP-based location is approximate (not GPS)
+- Upload to real hosting for more accurate results

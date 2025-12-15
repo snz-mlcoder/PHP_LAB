@@ -1,11 +1,18 @@
 <?php
 require 'user_info.php';
 
-// Get user data
+// Collect user data
 $ip      = get_ip();
 $device  = get_device();
 $os      = get_os();
 $browser = get_user_browser();
+
+// Load location only when user requests it
+$locationRequested = isset($_GET['show_location']);
+$location = null;
+
+$location = get_location($ip); // Expected: ?array or null
+
 ?>
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
@@ -27,31 +34,57 @@ $browser = get_user_browser();
 <main class="container">
 
     <header class="header">
-        <h1> User Info With PHP</h1>
-        <p>
-            This data is collected from browser headers using PHP $_SERVER variables.
-        </p>
+        <h1>User Info With PHP</h1>
+        <p>This data is collected from browser headers using PHP $_SERVER variables.</p>
+
+        
     </header>
 
     <section class="grid">
 
+        <!-- Location Card (always visible) -->
         <div class="card">
-            <span class="label"> IP Address</span>
+            <span class="label">Location</span>
+
+            <?php if (is_array($location)): ?>
+                <span class="value">
+                    <?php
+                    echo htmlspecialchars($location['country'] ?? 'N/A') . '، ' .
+                        htmlspecialchars($location['region'] ?? 'N/A') . '، ' .
+                        htmlspecialchars($location['city'] ?? 'N/A');
+                    ?>
+                </span>
+
+                <span class="value" dir="ltr" style="margin-top:0.5rem; display:block;">
+                    <?php
+                    echo 'Lat: ' . htmlspecialchars((string)($location['latitude'] ?? 'N/A')) .
+                        ' | Lng: ' . htmlspecialchars((string)($location['longitude'] ?? 'N/A'));
+                    ?>
+                </span>
+
+            <?php else: ?>
+                <span class="value">Location not available.</span>
+            <?php endif; ?>
+        </div>
+
+
+        <div class="card">
+            <span class="label">IP Address</span>
             <span class="value" dir="ltr"><?php echo htmlspecialchars($ip); ?></span>
         </div>
 
         <div class="card">
-            <span class="label"> Device</span>
+            <span class="label">Device</span>
             <span class="value"><?php echo htmlspecialchars($device); ?></span>
         </div>
 
         <div class="card">
-            <span class="label"> Operating System</span>
+            <span class="label">Operating System</span>
             <span class="value"><?php echo htmlspecialchars($os); ?></span>
         </div>
 
         <div class="card">
-            <span class="label"> Browser</span>
+            <span class="label">Browser</span>
             <span class="value"><?php echo htmlspecialchars($browser); ?></span>
         </div>
 

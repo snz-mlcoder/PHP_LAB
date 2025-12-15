@@ -45,3 +45,28 @@ function get_device() {
 
     return 'Computer';
 }
+
+function get_location(string $ip): ?array
+{
+    if ($ip === '127.0.0.1' || $ip === '::1') {
+        return null;
+    }
+
+    $json = @file_get_contents("https://ipapi.co/{$ip}/json/");
+    if (!$json) {
+        return null;
+    }
+
+    $data = json_decode($json, true);
+    if (!is_array($data) || !empty($data['error'])) {
+        return null;
+    }
+
+    return [
+        'country'   => $data['country_name'] ?? null,
+        'region'    => $data['region'] ?? null,
+        'city'      => $data['city'] ?? null,
+        'latitude'  => $data['latitude'] ?? null,
+        'longitude' => $data['longitude'] ?? null,
+    ];
+}

@@ -26,13 +26,15 @@ A simple PHP project that collects user input and displays it dynamically.
 ---
 
 ### 2️⃣ PHP User Info
-A PHP project that detects basic user information such as browser, OS, device type, and IP address.
+A PHP project that detects basic user information such as browser, OS, device type, and IP address , and approximate location (based on IP).
 
 **Concepts learned:**
-- PHP server variables
+- PHP server variables (`$_SERVER`)
 - User agent detection
 - Conditional logic
-- Environment awareness
+- Environment awareness (localhost vs production)
+- IP-based location detection using a public API
+- Output sanitization for security (`htmlspecialchars`)
 
 📁 Folder: `php-user-info`
 
