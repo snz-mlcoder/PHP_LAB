@@ -1,56 +1,44 @@
 # PHP Lab 🧪
 
-A personal PHP practice repository where I build small projects while learning PHP fundamentals.
+A personal PHP practice repository containing small beginner-friendly projects built while learning PHP fundamentals.
 
-This repository contains beginner-friendly PHP projects focused on:
-- Understanding PHP basics
+This repository focuses on:
+- PHP basics and syntax
 - Working with forms and user input
-- Detecting user environment information
+- Reading server and environment data
 - Combining PHP with HTML & CSS
 
 ---
 
-## 📂 Projects
 
 ### 1️⃣ PHP Input Recorder
-A simple PHP project that collects user input and displays it dynamically.
-
-**Concepts learned:**
-- PHP GET requests
-- HTML forms
-- PHP + HTML integration
-- Basic CSS (Flexbox)
+Collects user input using HTML forms and displays it dynamically with PHP.
 
 📁 Folder: `php-input-recorder`
 
 ---
 
 ### 2️⃣ PHP User Info
-A PHP project that detects basic user information such as browser, OS, device type, and IP address , and approximate location (based on IP).
-
-**Concepts learned:**
-- PHP server variables (`$_SERVER`)
-- User agent detection
-- Conditional logic
-- Environment awareness (localhost vs production)
-- IP-based location detection using a public API
-- Output sanitization for security (`htmlspecialchars`)
+Displays basic user information such as browser, OS, IP address, and environment details.
 
 📁 Folder: `php-user-info`
 
 ---
 
 ### 3️⃣ PHP PDF Upload & Viewer
-A minimal PHP project that allows users to upload a PDF file and view it directly in the browser.
-
-**Concepts learned:**
-- File uploads with `$_FILES`
-- Server-side file validation
-- Handling file paths
-- Displaying PDFs in the browser
-- Separating CSS into external files
+Allows users to upload a PDF file and view it directly in the browser.
 
 📁 Folder: `php-pdf-viewer`
+
+---
+## 📂 Projects
+
+###  4️⃣ PHP Clock
+A simple live PHP clock with timezone selection and a clean dark UI.
+
+📁 Folder: `php-clock`
+
+---
 
 ## 🛠 Requirements
 - PHP 7+
@@ -60,13 +48,12 @@ A minimal PHP project that allows users to upload a PDF file and view it directl
 
 ## 🚀 How to Run
 1. Clone the repository
-2. Move the project folder into `htdocs`
+2. Move it into the `htdocs` folder
 3. Start Apache
-4. Open the project URL in your browser
+4. Open the desired project folder in your browser
 
 ---
 
-##  Notes
-- These projects are for learning purposes
-- More PHP exercises will be added over time
-
+## 📌 Notes
+- This repository is for learning and practice purposes
+- New PHP projects will be added over time
