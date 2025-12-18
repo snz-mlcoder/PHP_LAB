@@ -1,9 +1,10 @@
 <?php
 declare(strict_types=1);
 
-require __DIR__ . '/../src/config.php';
+require __DIR__ . '/../src/bootstrap.php';
 require __DIR__ . '/../src/helpers.php';
 
+$hasStripe = (trim(STRIPE_PUBLISHABLE_KEY) !== '');
 ?>
 <!doctype html>
 <html lang="en">
@@ -12,8 +13,10 @@ require __DIR__ . '/../src/helpers.php';
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Donate (Stripe)</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/assets/css/styles.css" rel="stylesheet">
-  <script src="https://js.stripe.com/v3/"></script>
+  <link href="assets/css/styles.css" rel="stylesheet">
+  <?php if ($hasStripe): ?>
+    <script src="https://js.stripe.com/v3/"></script>
+  <?php endif; ?>
 </head>
 <body class="bg-light">
   <div class="container py-5">
@@ -36,24 +39,40 @@ require __DIR__ . '/../src/helpers.php';
                 <div class="form-text">Minimum: <?= (int)MIN_DONATION_EUR ?> EUR</div>
               </div>
 
-              <button class="btn btn-primary btn-lg" type="submit">Donate with Stripe</button>
+              <button class="btn btn-primary btn-lg" type="submit" <?= $hasStripe ? '' : 'disabled' ?>>
+                Donate with Stripe
+              </button>
+
               <div class="d-flex gap-2">
-                <a class="btn btn-outline-secondary" href="/transactions.php">Transactions</a>
+                <a class="btn btn-outline-secondary" href="transactions.php">Transactions</a>
               </div>
 
               <div id="msg" class="mt-2"></div>
             </form>
 
+            <?php if (!$hasStripe): ?>
+              <div class="alert alert-info mt-3 mb-0">
+                Dev mode: Stripe keys are not configured yet. Add keys to <code>.env</code> to enable payments.
+              </div>
+            <?php endif; ?>
+
             <hr class="my-4">
             <small class="text-muted">
               Note: Donation is recorded after Stripe webhook confirms payment.
             </small>
+
+            <?php if (APP_DEBUG): ?>
+              <div class="mt-3">
+                <small class="text-muted">APP_ENV: <code><?= htmlspecialchars(APP_ENV) ?></code></small>
+              </div>
+            <?php endif; ?>
           </div>
         </div>
       </div>
     </div>
   </div>
 
+<?php if ($hasStripe): ?>
 <script>
 const stripe = Stripe("<?= htmlspecialchars(STRIPE_PUBLISHABLE_KEY) ?>");
 
@@ -65,8 +84,13 @@ form.addEventListener("submit", async (e) => {
   msg.innerHTML = "";
 
   const fd = new FormData(form);
-  const res = await fetch("/create_checkout_session.php", { method: "POST", body: fd });
-  const data = await res.json();
+
+  const res = await fetch("create_checkout_session.php", {
+    method: "POST",
+    body: fd
+  });
+
+  const data = await res.json().catch(() => ({}));
 
   if (!res.ok) {
     msg.innerHTML = `<div class="alert alert-danger">${data.error || "Error"}</div>`;
@@ -75,10 +99,13 @@ form.addEventListener("submit", async (e) => {
 
   const { sessionId } = data;
   const { error } = await stripe.redirectToCheckout({ sessionId });
+
   if (error) {
     msg.innerHTML = `<div class="alert alert-danger">${error.message}</div>`;
   }
 });
 </script>
+<?php endif; ?>
+
 </body>
 </html>

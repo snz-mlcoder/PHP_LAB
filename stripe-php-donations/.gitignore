@@ -1,5 +1,9 @@
 composer.phar
 
-/vendor
+/vendor/
 .env
 composer.phar
+.DS_Store
+/storage/logs/*.log
+/storage/debugbar/*
+/storage/framework/sessions/*
